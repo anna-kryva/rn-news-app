@@ -30,16 +30,19 @@ const TagView = styled.View`
 
 const StyledTag = styled.Text<StyledTag>`
   background-color: ${(props) => getColor(props.name)};
-  color: '#fff';
-  border-radius: 2;
+  color: #fff;
+  border-radius: 2px;
   font-weight: bold;
-  font-size: 20;
-  padding: 5;
+  font-size: 12px;
+  padding: 3px;
+  margin: 5px;
 `;
 
 export const TagsList: React.FC<Props> = (...tags) => {
   const tagList = tags.map((tag) => (
-    <StyledTag name={tag.name}>{tag.name.toUpperCase()}</StyledTag>
+    <StyledTag key={tag.id} name={tag.name}>
+      {tag.name.toUpperCase()}
+    </StyledTag>
   ));
 
   return <TagView>{tagList}</TagView>;
