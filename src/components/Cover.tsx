@@ -1,17 +1,10 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {Dimensions} from 'react-native';
 import {ImageShadow} from './ImageShadow';
-
-const getHeight = (padding: number): number => {
-  const calculatedHeight =
-    ((Dimensions.get('window').width - 2 * padding) * 9) / 16;
-  return Math.floor(calculatedHeight);
-};
 
 const ImageContainer = styled.View`
   width: 100%;
-  height: ${getHeight(10)}px;
+  aspect-ratio: ${16 / 9};
   border-radius: 5px;
   shadow-color: #000;
   shadow-offset: 5px 5px;
