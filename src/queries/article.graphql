@@ -3,6 +3,9 @@ query getArticleById($id: ID) {
     id
     title
     content
+    cover {
+      url
+    }
     tags {
       name
     }
