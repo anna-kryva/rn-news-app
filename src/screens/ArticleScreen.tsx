@@ -28,11 +28,7 @@ const Title = styled.Text`
   text-align: center;
 `;
 
-interface Props {
-  article: Article;
-}
-
-export const ArticleScreen: React.FC<Props> = ({article}) => {
+export const ArticleScreen: React.FC<Props> = () => {
   return (
     <Container>
       <ScrollView
