@@ -16,6 +16,7 @@ const Container = styled.View`
   shadow-radius: 5px;
   elevation: 5;
   background-color: white;
+  margin-vertical: 10px;
 `;
 
 const CoverContent = styled.View`
