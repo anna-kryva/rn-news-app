@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {Tag} from '../generated/graphql';
+import {TagType} from '../types';
 
 const getColor = (name: string): string => {
   switch (name.toLowerCase()) {
@@ -16,7 +16,7 @@ const getColor = (name: string): string => {
 };
 
 interface Props {
-  tags: Tag[];
+  tags: TagType[];
 }
 
 interface StyledTag {
@@ -38,7 +38,7 @@ const StyledTag = styled.Text<StyledTag>`
   margin: 5px;
 `;
 
-export const TagsList: React.FC<Props> = (...tags) => {
+export const TagsList: React.FC<Props> = ({tags}) => {
   const tagList = tags.map((tag) => (
     <StyledTag key={tag.id} name={tag.name}>
       {tag.name.toUpperCase()}

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 import {ImageShadow} from './ImageShadow';
+import {CoverImage} from '../types';
 
 const ImageContainer = styled.View`
   width: 100%;
@@ -20,17 +21,17 @@ const ImageBackground = styled.ImageBackground`
 `;
 
 interface Props {
-  imageURL?: string;
+  image?: CoverImage;
   children?: React.ReactChild;
 }
 
-export const Cover: React.FC<Props> = ({imageURL, children}) => {
+export const Cover: React.FC<Props> = ({image, children}) => {
   return (
     <ImageContainer>
       <ImageBackground
         borderRadius={5}
         defaultSource={require('../assets/placeholder.jpg')}
-        source={imageURL ? {uri: imageURL} : require('../assets/default.png')}
+        source={image ? {uri: image.url} : require('../assets/default.png')}
         resizeMode="cover">
         <ImageShadow>{children}</ImageShadow>
       </ImageBackground>

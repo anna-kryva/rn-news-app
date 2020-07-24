@@ -2,7 +2,7 @@ import React from 'react';
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
-import {Article} from '../generated/graphql';
+import {ArticleCardType} from '../types';
 
 import {Cover} from './Cover';
 import {TagsList} from './TagsList';
@@ -41,13 +41,13 @@ const ShortContent = styled.Text`
 `;
 
 interface Props {
-  article: Article;
+  article: ArticleCardType;
 }
 
 export const ArticleCard: React.FC<Props> = ({article}) => {
   return (
     <Container>
-      <Cover>
+      <Cover image={article?.cover}>
         <CoverContent>
           <TouchableOpacity>
             <Title>{article.title}</Title>
