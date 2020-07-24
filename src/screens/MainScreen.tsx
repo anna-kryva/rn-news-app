@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
 import styled from 'styled-components/native';
-import {FlatList, ListRenderItem, Text} from 'react-native';
+import {FlatList, ListRenderItem} from 'react-native';
 
 import {useArticlesQuery} from '../generated/graphql';
 import {ArticleCardType, MainScreenProps} from '../types';
@@ -8,6 +8,7 @@ import {ArticleCardType, MainScreenProps} from '../types';
 import {ArticleCard} from '../components/ArticleCard';
 import {LoadingSpinner} from '../components/LoadingSpinner';
 import {EmptyList} from '../components/EmptyList';
+import {ErrorComponent} from '../components/ErrorComponent';
 
 const Container = styled.View`
   flex: 1;
@@ -15,7 +16,7 @@ const Container = styled.View`
 `;
 
 export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
-  const {loading, error, data} = useArticlesQuery({
+  const {loading, error, data, refetch} = useArticlesQuery({
     fetchPolicy: 'network-only',
   });
 
@@ -32,7 +33,7 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
   );
 
   if (error) {
-    return <Text>Error :(</Text>;
+    return <ErrorComponent refetch={() => refetch()} />;
   }
 
   if (loading) {

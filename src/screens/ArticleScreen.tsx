@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
-import {ScrollView, Text} from 'react-native';
+import {ScrollView} from 'react-native';
 import Markdown from 'react-native-markdown-display';
 
 import {Cover} from '../components/Cover';
@@ -11,6 +11,7 @@ import {LoadingSpinner} from '../components/LoadingSpinner';
 
 import {ArticleScreenProps} from '../types';
 import {useNavigation} from '@react-navigation/native';
+import {ErrorComponent} from '../components/ErrorComponent';
 
 const Container = styled.View`
   flex: 1;
@@ -38,7 +39,6 @@ const MarkdownContainer = styled.View`
 
 export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
   const {setOptions} = useNavigation();
-
   const {id} = route.params;
   const {data, loading, error, refetch} = useGetArticleByIdQuery({
     variables: {id},
@@ -49,7 +49,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
   }, [data?.article?.title, setOptions]);
 
   if (error) {
-    return <Text>Error :(</Text>;
+    return <ErrorComponent refetch={() => refetch()} />;
   }
 
   if (loading) {
