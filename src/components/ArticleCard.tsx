@@ -42,20 +42,21 @@ const ShortContent = styled.Text`
 
 interface Props {
   article: ArticleCardType;
+  onPress: (id: string) => void;
 }
 
-export const ArticleCard: React.FC<Props> = ({article}) => {
+export const ArticleCard: React.FC<Props> = ({article, onPress}) => {
   return (
     <Container>
-      <Cover image={article?.cover}>
-        <CoverContent>
-          <TouchableOpacity>
+      <TouchableOpacity onPress={() => onPress(article.id)}>
+        <Cover image={article?.cover}>
+          <CoverContent>
             <Title>{article.title}</Title>
-          </TouchableOpacity>
 
-          <TagsList tags={article.tags} />
-        </CoverContent>
-      </Cover>
+            <TagsList tags={article.tags} />
+          </CoverContent>
+        </Cover>
+      </TouchableOpacity>
 
       <ShortContent numberOfLines={3} ellipsizeMode="tail">
         {article.shortContent}

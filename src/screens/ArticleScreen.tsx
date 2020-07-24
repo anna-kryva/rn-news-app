@@ -1,12 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
-import {ScrollView} from 'react-native';
+import {ScrollView, Text} from 'react-native';
 import Markdown from 'react-native-markdown-display';
-
-import {Article} from '../generated/graphql';
 
 import {Cover} from '../components/Cover';
 import {TagsList} from '../components/TagsList';
+
+import {useGetArticleByIdQuery} from '../generated/graphql';
+import {LoadingSpinner} from '../components/LoadingSpinner';
+
+import {ArticleScreenProps} from '../types';
+import {useNavigation} from '@react-navigation/native';
 
 const Container = styled.View`
   flex: 1;
@@ -28,20 +32,45 @@ const Title = styled.Text`
   text-align: center;
 `;
 
-export const ArticleScreen: React.FC<Props> = () => {
+const MarkdownContainer = styled.View`
+  padding: 10px;
+`;
+
+export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
+  const {setOptions} = useNavigation();
+
+  const {id} = route.params;
+  const {data, loading, error, refetch} = useGetArticleByIdQuery({
+    variables: {id},
+  });
+
+  useEffect(() => {
+    setOptions({headerTitle: data?.article?.title});
+  }, [data?.article?.title, setOptions]);
+
+  if (error) {
+    return <Text>Error :(</Text>;
+  }
+
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <Container>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={{height: '100%'}}>
-        <Cover>
+        <Cover image={data!.article!.cover}>
           <CoverContent>
-            <Title>{article.title}</Title>
-            <TagsList tags={article.tags} />
+            <Title>{data!.article!.title}</Title>
+            <TagsList tags={data!.article!.tags} />
           </CoverContent>
         </Cover>
 
-        <Markdown>{article.content}</Markdown>
+        <MarkdownContainer>
+          <Markdown>{data!.article!.content}</Markdown>
+        </MarkdownContainer>
       </ScrollView>
     </Container>
   );
