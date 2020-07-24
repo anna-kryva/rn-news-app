@@ -7,6 +7,7 @@ query getArticleById($id: ID) {
       url
     }
     tags {
+      id
       name
     }
   }
