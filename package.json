@@ -49,7 +49,6 @@
     "@typescript-eslint/parser": "^3.7.0",
     "eslint": "^7.5.0",
     "prettier": "^2.0.5",
-    "react-native-svg-transformer": "^0.14.3",
     "typescript": "~3.9.5"
   },
   "private": true
