@@ -6,7 +6,7 @@ import Markdown from 'react-native-markdown-display';
 import {Cover} from '../components/Cover';
 import {TagsList} from '../components/TagsList';
 
-import {useGetArticleByIdQuery} from '../generated/graphql';
+import {useArticleQuery} from '../generated/graphql';
 import {LoadingSpinner} from '../components/LoadingSpinner';
 
 import {ArticleScreenProps} from '../types';
@@ -40,7 +40,7 @@ const MarkdownContainer = styled.View`
 export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
   const {setOptions} = useNavigation();
   const {id} = route.params;
-  const {data, loading, error, refetch} = useGetArticleByIdQuery({
+  const {data, loading, error, refetch} = useArticleQuery({
     variables: {id},
   });
 
@@ -49,6 +49,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
   }, [data?.article?.title, setOptions]);
 
   if (error) {
+    console.log(error);
     return <ErrorComponent refetch={() => refetch()} />;
   }
 

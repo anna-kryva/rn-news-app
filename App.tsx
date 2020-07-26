@@ -1,5 +1,4 @@
 import React from 'react';
-import Constants from 'expo-constants';
 
 import {ArticleScreen} from './src/screens/ArticleScreen';
 import {MainScreen} from './src/screens/MainScreen';
@@ -7,14 +6,11 @@ import {MainScreenHeader} from './src/components/MainScreenHeader';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
+
+import client from './apollo-client';
+import {ApolloProvider} from '@apollo/client';
 
 const Stack = createStackNavigator();
-
-const client = new ApolloClient({
-  uri: Constants.manifest.extra.graphCMSUrl,
-  cache: new InMemoryCache(),
-});
 
 export default function App() {
   return (
