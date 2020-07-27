@@ -1,30 +1,5 @@
 import React from 'react';
-import styled from 'styled-components/native';
-
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-`;
-
-const ErrorText = styled.Text`
-  font-size: 20px;
-  color: gray;
-  text-align: center;
-  padding: 10px;
-`;
-
-const RefreshButton = styled.TouchableOpacity`
-  width: 50%;
-  aspect-ratio: 1;
-  margin: 20px;
-`;
-
-const Image = styled.Image`
-  width: 100%;
-  height: 100%;
-`;
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 
 interface Props {
   refetch: () => void;
@@ -32,11 +7,26 @@ interface Props {
 
 export const ErrorComponent: React.FC<Props> = ({refetch}) => {
   return (
-    <Container>
-      <ErrorText>Oops, something went wrong... Please, try again</ErrorText>
-      <RefreshButton onPress={refetch}>
-        <Image source={require('../assets/refresh.png')} resizeMode="contain" />
-      </RefreshButton>
-    </Container>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 20,
+      }}>
+      <Text
+        style={{fontSize: 20, color: 'gray', textAlign: 'center', padding: 10}}>
+        Oops, something went wrong... Please, try again
+      </Text>
+      <TouchableOpacity
+        style={{width: '50%', aspectRatio: 1, margin: 20}}
+        onPress={refetch}>
+        <Image
+          style={{flex: 1}}
+          source={require('../assets/refresh.png')}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
+    </View>
   );
 };

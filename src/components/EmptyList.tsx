@@ -1,43 +1,26 @@
 import React from 'react';
-import styled from 'styled-components/native';
-
-const Container = styled.View`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
-`;
-
-const NoResultsText = styled.Text`
-  font-size: 20px;
-  text-align: center;
-  color: gray;
-  padding: 5px;
-`;
-
-const ImageContainer = styled.View`
-  margin: 10px;
-  width: 50%;
-  aspect-ratio: 1;
-`;
-
-const Image = styled.Image`
-  width: 100%;
-  height: 100%;
-`;
+import {View, Text, Image} from 'react-native';
 
 export const EmptyList: React.FC = () => {
   return (
-    <Container>
-      <NoResultsText>
+    <View
+      style={{
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: 10,
+      }}>
+      <Text
+        style={{fontSize: 20, textAlign: 'center', color: 'gray', padding: 5}}>
         Our content manager is working on new articles. Stay in touch!
-      </NoResultsText>
-      <ImageContainer>
+      </Text>
+      <View style={{margin: 10, width: '50%', aspectRatio: 1}}>
         <Image
+          style={{flex: 1}}
           source={require('../assets/empty-list.png')}
           resizeMode="contain"
         />
-      </ImageContainer>
-    </Container>
+      </View>
+    </View>
   );
 };

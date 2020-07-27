@@ -1,4 +1,5 @@
 import React from 'react';
+import {Text} from 'react-native';
 import styled from 'styled-components/native';
 
 import {ArticleCardType} from '../types';
@@ -17,13 +18,6 @@ const Container = styled.View`
   margin: 10px;
 `;
 
-const ShortContent = styled.Text`
-  font-size: 14px;
-  line-height: 24px;
-  color: #808080;
-  padding: 10px;
-`;
-
 interface Props {
   article: ArticleCardType;
   onPress: (id: string) => void;
@@ -38,9 +32,12 @@ export const ArticleCard: React.FC<Props> = ({article, onPress}) => {
         <CoverContent id={id} title={title} tags={tags} onPress={onPress} />
       </Cover>
 
-      <ShortContent numberOfLines={3} ellipsizeMode="tail">
+      <Text
+        numberOfLines={3}
+        ellipsizeMode="tail"
+        style={{fontSize: 14, lineHeight: 24, color: '#808080', padding: 10}}>
         {article.shortContent}
-      </ShortContent>
+      </Text>
     </Container>
   );
 };

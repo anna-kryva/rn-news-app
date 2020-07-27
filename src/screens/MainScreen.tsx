@@ -1,6 +1,5 @@
 import React, {useCallback} from 'react';
-import styled from 'styled-components/native';
-import {FlatList, ListRenderItem} from 'react-native';
+import {FlatList, ListRenderItem, View} from 'react-native';
 
 import {useArticlesQuery} from '../generated/graphql';
 import {ArticleCardType, MainScreenProps} from '../types';
@@ -9,10 +8,6 @@ import {ArticleCard} from '../components/ArticleCard';
 import {LoadingSpinner} from '../components/LoadingSpinner';
 import {EmptyList} from '../components/EmptyList';
 import {ErrorComponent} from '../components/ErrorComponent';
-
-const Container = styled.View`
-  flex: 1;
-`;
 
 export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
   const {loading, error, data, refetch} = useArticlesQuery({
@@ -40,7 +35,7 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
   }
 
   return (
-    <Container>
+    <View style={{flex: 1}}>
       {data!.articles.length !== 0 ? (
         <FlatList
           data={data!.articles}
@@ -50,6 +45,6 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
       ) : (
         <EmptyList />
       )}
-    </Container>
+    </View>
   );
 };

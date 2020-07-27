@@ -1,6 +1,13 @@
 import React from 'react';
-import {TouchableOpacity, StyleSheet} from 'react-native';
-import styled from 'styled-components/native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  ViewStyle,
+  FlexAlignType,
+  FlexStyle,
+  TextStyle,
+} from 'react-native';
 import {TagsList} from './TagsList';
 import {TagType} from '../types';
 
@@ -10,24 +17,12 @@ interface Props {
   tags: TagType[];
   onPress?: (id: string) => void;
   disabled?: boolean;
-  centered?: boolean;
+  style?: {
+    alignItems: FlexAlignType;
+    justifyContent: FlexStyle['justifyContent'];
+    textAlign: TextStyle['textAlign'];
+  };
 }
-
-const Container = styled.View`
-  width: 100%;
-  height: 100%;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding: 10px;
-`;
-
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  padding: 5px;
-  text-align: left;
-`;
 
 export const CoverContent: React.FC<Props> = ({
   id,
@@ -35,28 +30,34 @@ export const CoverContent: React.FC<Props> = ({
   tags,
   onPress,
   disabled,
-  centered,
+  style,
 }) => {
   return (
-    <Container style={centered ? styles.container : null}>
+    <View
+      style={{
+        flex: 1,
+        justifyContent: 'flex-end',
+        alignItems: 'flex-start',
+        padding: 10,
+        ...style,
+      }}>
       <TouchableOpacity
         disabled={disabled ?? false}
         onPress={() => {
           onPress ? onPress(id) : undefined;
         }}>
-        <Title style={centered ? styles.title : null}>{title}</Title>
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: '700',
+            color: 'white',
+            padding: 5,
+            ...style,
+          }}>
+          {title}
+        </Text>
       </TouchableOpacity>
       <TagsList tags={tags} />
-    </Container>
+    </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    textAlign: 'center',
-  },
-});

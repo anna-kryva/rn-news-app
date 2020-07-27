@@ -19,7 +19,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
     loading: cachedLoading,
     error: cachedError,
   } = useArticleQuery({variables: {id}});
-  
+
   const {
     data: fetchedData,
     loading: fetchedLoading,
@@ -51,7 +51,11 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
             title={cachedData!.article!.title}
             tags={cachedData!.article!.tags}
             disabled={true}
-            centered={true}
+            style={{
+              alignItems: 'center',
+              justifyContent: 'center',
+              textAlign: 'center',
+            }}
           />
         </Cover>
         {fetchedLoading ? (

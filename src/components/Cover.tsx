@@ -1,4 +1,5 @@
 import React, {ReactNode} from 'react';
+import {Image} from 'react-native';
 import styled from 'styled-components/native';
 import {ImageShadow} from './ImageShadow';
 import {CoverImage} from '../types';
@@ -12,12 +13,6 @@ const ImageContainer = styled.View`
   shadow-opacity: 1;
   shadow-radius: 5px;
   elevation: 5;
-`;
-
-const ImageBackground = styled.Image`
-  width: 100%;
-  height: 100%;
-  border-radius: 5px;
 `;
 
 const Wrapper = styled.View`
@@ -36,7 +31,8 @@ interface Props {
 export const Cover: React.FC<Props> = ({image, children}) => {
   return (
     <ImageContainer>
-      <ImageBackground
+      <Image
+        style={{flex: 1}}
         borderRadius={5}
         defaultSource={require('../assets/placeholder.jpg')}
         source={image ? {uri: image.url} : require('../assets/default.png')}

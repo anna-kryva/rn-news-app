@@ -1,12 +1,6 @@
 import React from 'react';
-import styled from 'styled-components/native';
-
-const Spinner = styled.ActivityIndicator`
-  flex: 1;
-  align-items: center;
-  justify-content: center;
-`;
+import {ActivityIndicator} from 'react-native';
 
 export const LoadingSpinner: React.FC = () => {
-  return <Spinner color="#0a88f2" size="large" />;
+  return <ActivityIndicator color="#0a88f2" size="large" />;
 };
