@@ -16,7 +16,7 @@ const Container = styled.View`
 `;
 
 const ScrollView = styled.ScrollView`
-  height: '100%';
+  height: 100%;
 `;
 
 const MarkdownContainer = styled.View`
