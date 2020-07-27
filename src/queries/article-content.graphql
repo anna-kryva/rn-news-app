@@ -1,5 +1,6 @@
 query ArticleContent($id: ID!) {
   article(where: {id: $id}) {
+    id
     content
   }
 }
