@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {View, ScrollView} from 'react-native';
+import {Animated, View, ScrollView} from 'react-native';
 import Markdown from 'react-native-markdown-display';
 import {useNavigation} from '@react-navigation/native';
 
@@ -18,7 +18,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
     data: cachedData,
     loading: cachedLoading,
     error: cachedError,
-  } = useArticleQuery({variables: {id}});
+  } = useArticleQuery({variables: {id}, fetchPolicy: 'cache-only'});
 
   const {
     data: fetchedData,
@@ -27,7 +27,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
     refetch,
   } = useArticleContentQuery({
     variables: {id},
-    fetchPolicy: 'no-cache',
+    fetchPolicy: 'cache-first',
   });
 
   useEffect(() => {
@@ -42,15 +42,23 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
     return <LoadingSpinner />;
   }
 
+  const scrollY = new Animated.Value(0);
+  const headerTranslate = Animated.divide(scrollY, -2);
+
   return (
     <View style={{flex: 1}}>
-      <ScrollView contentInsetAdjustmentBehavior="automatic" style={{flex: 1}}>
-        <Cover image={cachedData!.article!.cover}>
+      <Animated.View
+        style={{
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          transform: [{translateY: headerTranslate}],
+        }}>
+        <Cover image={cachedData!.article!.cover} rounded={false}>
           <CoverContent
-            id={id}
             title={cachedData!.article!.title}
             tags={cachedData!.article!.tags}
-            disabled={true}
             style={{
               alignItems: 'center',
               justifyContent: 'center',
@@ -58,14 +66,22 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
             }}
           />
         </Cover>
+      </Animated.View>
+      <Animated.ScrollView
+        scrollEventThrottle={1}
+        onScroll={Animated.event(
+          [{nativeEvent: {contentOffset: {y: scrollY}}}],
+          {useNativeDriver: true},
+        )}>
+        <View style={{width: '100%', aspectRatio: 16 / 9}} />
         {fetchedLoading ? (
           <LoadingSpinner />
         ) : (
-          <View style={{padding: 10}}>
-            <Markdown>{fetchedData!.article!.content}</Markdown>
+          <View style={{padding: 10, backgroundColor: 'white'}}>
+            <Markdown>{fetchedData?.article?.content ?? ''}</Markdown>
           </View>
         )}
-      </ScrollView>
+      </Animated.ScrollView>
     </View>
   );
 };
