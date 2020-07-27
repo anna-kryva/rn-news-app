@@ -45,21 +45,25 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
 
   return (
     <Container>
-      <ScrollView contentInsetAdjustmentBehavior="automatic">
-        <Cover image={data!.article!.cover}>
-          <CoverContent
-            id={id}
-            title={data!.article!.title}
-            tags={data!.article!.tags}
-            disabled={true}
-            centered={true}
-          />
-        </Cover>
+      {data ? (
+        <ScrollView contentInsetAdjustmentBehavior="automatic">
+          <Cover image={data!.article!.cover}>
+            <CoverContent
+              id={id}
+              title={data!.article!.title}
+              tags={data!.article!.tags}
+              disabled={true}
+              centered={true}
+            />
+          </Cover>
 
-        <MarkdownContainer>
-          <Markdown>{data!.article!.content}</Markdown>
-        </MarkdownContainer>
-      </ScrollView>
+          <MarkdownContainer>
+            <Markdown>{data!.article!.content}</Markdown>
+          </MarkdownContainer>
+        </ScrollView>
+      ) : (
+        <ErrorComponent refetch={() => refetch()} />
+      )}
     </Container>
   );
 };

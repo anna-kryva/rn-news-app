@@ -30,15 +30,12 @@ interface Props {
 }
 
 export const ArticleCard: React.FC<Props> = ({article, onPress}) => {
+  const {cover, id, title, tags} = article;
+
   return (
     <Container>
-      <Cover image={article?.cover}>
-        <CoverContent
-          id={article.id}
-          title={article.title}
-          tags={article.tags}
-          onPress={onPress}
-        />
+      <Cover image={cover}>
+        <CoverContent id={id} title={title} tags={tags} onPress={onPress} />
       </Cover>
 
       <ShortContent numberOfLines={3} ellipsizeMode="tail">
