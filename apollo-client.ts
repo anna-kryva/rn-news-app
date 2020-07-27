@@ -1,3 +1,4 @@
+// TODO: I think it's logical to keep all source files under the /src folder (except App.tsx of course). Please move this one and declarations.d.ts to /src.
 import {ApolloClient, InMemoryCache} from '@apollo/client';
 import Constants from 'expo-constants';
 
