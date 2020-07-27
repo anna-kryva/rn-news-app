@@ -1,36 +1,22 @@
 import React, {useEffect} from 'react';
 import styled from 'styled-components/native';
-import {ScrollView} from 'react-native';
 import Markdown from 'react-native-markdown-display';
-
-import {Cover} from '../components/Cover';
-import {TagsList} from '../components/TagsList';
+import {useNavigation} from '@react-navigation/native';
 
 import {useArticleQuery} from '../generated/graphql';
-import {LoadingSpinner} from '../components/LoadingSpinner';
-
 import {ArticleScreenProps} from '../types';
-import {useNavigation} from '@react-navigation/native';
+
+import {Cover} from '../components/Cover';
 import {ErrorComponent} from '../components/ErrorComponent';
+import {CoverContent} from '../components/CoverContent';
+import {LoadingSpinner} from '../components/LoadingSpinner';
 
 const Container = styled.View`
   flex: 1;
 `;
 
-const CoverContent = styled.View`
-  width: 100%;
-  height: 100%;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-`;
-
-const Title = styled.Text`
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-  padding: 5px;
-  text-align: center;
+const ScrollView = styled.ScrollView`
+  height: '100%';
 `;
 
 const MarkdownContainer = styled.View`
@@ -59,14 +45,15 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
 
   return (
     <Container>
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={{height: '100%'}}>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Cover image={data!.article!.cover}>
-          <CoverContent>
-            <Title>{data!.article!.title}</Title>
-            <TagsList tags={data!.article!.tags} />
-          </CoverContent>
+          <CoverContent
+            id={id}
+            title={data!.article!.title}
+            tags={data!.article!.tags}
+            disabled={true}
+            centered={true}
+          />
         </Cover>
 
         <MarkdownContainer>

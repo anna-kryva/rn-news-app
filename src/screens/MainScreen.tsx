@@ -12,7 +12,6 @@ import {ErrorComponent} from '../components/ErrorComponent';
 
 const Container = styled.View`
   flex: 1;
-  padding: 10px;
 `;
 
 export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {

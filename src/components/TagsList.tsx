@@ -34,7 +34,7 @@ const StyledTag = styled.Text<StyledTag>`
   border-radius: 2px;
   font-weight: bold;
   font-size: 12px;
-  padding: 3px;
+  padding: 5px;
   margin: 5px;
 `;
 

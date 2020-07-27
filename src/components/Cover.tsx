@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {ReactNode} from 'react';
 import styled from 'styled-components/native';
 import {ImageShadow} from './ImageShadow';
 import {CoverImage} from '../types';
@@ -6,7 +6,7 @@ import {CoverImage} from '../types';
 const ImageContainer = styled.View`
   width: 100%;
   aspect-ratio: ${16 / 9};
-  border-radius: 5px;
+  border-radius: 10px;
   shadow-color: #000;
   shadow-offset: 5px 5px;
   shadow-opacity: 1;
@@ -14,15 +14,23 @@ const ImageContainer = styled.View`
   elevation: 5;
 `;
 
-const ImageBackground = styled.ImageBackground`
+const ImageBackground = styled.Image`
   width: 100%;
   height: 100%;
   border-radius: 5px;
 `;
 
+const Wrapper = styled.View`
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
+
 interface Props {
   image?: CoverImage;
-  children?: React.ReactChild;
+  children?: ReactNode;
 }
 
 export const Cover: React.FC<Props> = ({image, children}) => {
@@ -32,9 +40,12 @@ export const Cover: React.FC<Props> = ({image, children}) => {
         borderRadius={5}
         defaultSource={require('../assets/placeholder.jpg')}
         source={image ? {uri: image.url} : require('../assets/default.png')}
-        resizeMode="cover">
-        <ImageShadow>{children}</ImageShadow>
-      </ImageBackground>
+        resizeMode="cover"
+      />
+      <Wrapper>
+        <ImageShadow />
+      </Wrapper>
+      <Wrapper>{children}</Wrapper>
     </ImageContainer>
   );
 };
