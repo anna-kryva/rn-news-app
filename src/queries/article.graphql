@@ -2,7 +2,7 @@ query Article($id: ID!) {
   article(where: {id: $id}) {
     id
     title
-    content
+    shortContent
     cover {
       url
     }
