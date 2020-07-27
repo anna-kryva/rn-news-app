@@ -1,7 +1,11 @@
 import React from 'react';
 import Svg, {LinearGradient, Defs, Stop, Rect} from 'react-native-svg';
 
-export const ImageShadow: React.FC = () => {
+interface Props {
+  rounded: boolean;
+}
+
+export const ImageShadow: React.FC<Props> = ({rounded}) => {
   return (
     <Svg width="100%" height="100%" viewBox="0 0 400 225">
       <Defs>
@@ -16,8 +20,8 @@ export const ImageShadow: React.FC = () => {
         width="100%"
         height="100%"
         fill="url(#grad)"
-        rx="5"
-        ry="5"
+        rx={rounded ? '5' : '0'}
+        ry={rounded ? '5' : '0'}
       />
     </Svg>
   );

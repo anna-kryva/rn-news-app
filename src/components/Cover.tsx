@@ -15,20 +15,21 @@ const Wrapper = styled.View`
 interface Props {
   image?: CoverImage;
   children?: ReactNode;
+  rounded: boolean;
 }
 
-export const Cover: React.FC<Props> = ({image, children}) => {
+export const Cover: React.FC<Props> = ({image, children, rounded}) => {
   return (
-    <View style={{aspectRatio: 16 / 9, borderRadius: 10}}>
+    <View style={{aspectRatio: 16 / 9, borderRadius: rounded ? 10 : 0}}>
       <Image
         style={{flex: 1}}
-        borderRadius={5}
+        borderRadius={rounded ? 5 : 0}
         defaultSource={require('../assets/placeholder.jpg')}
         source={image ? {uri: image.url} : require('../assets/default.png')}
         resizeMode="cover"
       />
       <Wrapper>
-        <ImageShadow />
+        <ImageShadow rounded={rounded} />
       </Wrapper>
       <Wrapper>{children}</Wrapper>
     </View>

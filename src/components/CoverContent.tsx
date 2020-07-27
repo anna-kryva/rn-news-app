@@ -1,22 +1,11 @@
 import React from 'react';
-import {
-  Text,
-  View,
-  TouchableOpacity,
-  ViewStyle,
-  FlexAlignType,
-  FlexStyle,
-  TextStyle,
-} from 'react-native';
+import {Text, View, FlexAlignType, FlexStyle, TextStyle} from 'react-native';
 import {TagsList} from './TagsList';
 import {TagType} from '../types';
 
 interface Props {
-  id: string;
   title: string;
   tags: TagType[];
-  onPress?: (id: string) => void;
-  disabled?: boolean;
   style?: {
     alignItems: FlexAlignType;
     justifyContent: FlexStyle['justifyContent'];
@@ -24,14 +13,7 @@ interface Props {
   };
 }
 
-export const CoverContent: React.FC<Props> = ({
-  id,
-  title,
-  tags,
-  onPress,
-  disabled,
-  style,
-}) => {
+export const CoverContent: React.FC<Props> = ({title, tags, style}) => {
   return (
     <View
       style={{
@@ -41,22 +23,16 @@ export const CoverContent: React.FC<Props> = ({
         padding: 10,
         ...style,
       }}>
-      <TouchableOpacity
-        disabled={disabled ?? false}
-        onPress={() => {
-          onPress ? onPress(id) : undefined;
+      <Text
+        style={{
+          fontSize: 20,
+          fontWeight: '700',
+          color: 'white',
+          padding: 5,
+          ...style,
         }}>
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: '700',
-            color: 'white',
-            padding: 5,
-            ...style,
-          }}>
-          {title}
-        </Text>
-      </TouchableOpacity>
+        {title}
+      </Text>
       <TagsList tags={tags} />
     </View>
   );
