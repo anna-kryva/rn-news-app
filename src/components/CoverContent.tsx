@@ -6,6 +6,8 @@ import {TagType} from '../types';
 interface Props {
   title: string;
   tags: TagType[];
+// TODO: Replace with just:
+// style?: StyleProp<ViewStyle>;
   style?: {
     alignItems: FlexAlignType;
     justifyContent: FlexStyle['justifyContent'];
@@ -13,6 +15,7 @@ interface Props {
   };
 }
 
+// TODO: Extract Text styles using styled-components
 export const CoverContent: React.FC<Props> = ({title, tags, style}) => {
   return (
     <View

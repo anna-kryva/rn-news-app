@@ -1,6 +1,8 @@
 import React from 'react';
 import {View, Text, Image} from 'react-native';
 
+// TODO: Extract Text styles using styled-components
+// TODO: Try to replace empty-list.png with a vector equivalent (https://material.io/resources/icons/)
 export const EmptyList: React.FC = () => {
   return (
     <View

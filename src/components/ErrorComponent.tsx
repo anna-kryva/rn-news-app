@@ -5,6 +5,8 @@ interface Props {
   refetch: () => void;
 }
 
+// TODO: Extract Text styles using styled-components
+// TODO: Try to replace refresh.png with a vector equivalent (https://material.io/resources/icons/)
 export const ErrorComponent: React.FC<Props> = ({refetch}) => {
   return (
     <View

@@ -7,6 +7,7 @@ import {ArticleCardType} from '../types';
 import {Cover} from './Cover';
 import {CoverContent} from './CoverContent';
 
+// TODO: Margin shouldn't be placed in styled-components
 const Container = styled.View`
   border-radius: 5px;
   shadow-color: #000;
@@ -26,6 +27,8 @@ interface Props {
 export const ArticleCard: React.FC<Props> = ({article, onPress}) => {
   const {cover, id, title, tags} = article;
 
+// TODO: Extract onPress using useCallback
+// TODO: Extract Text styles using styled-components
   return (
     <Container>
       <TouchableOpacity onPress={() => onPress(id)}>

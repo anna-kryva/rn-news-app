@@ -19,6 +19,8 @@ interface Props {
   tags: TagType[];
 }
 
+// TODO: Extract Text styles using styled-components.
+// By the way, you can still call getColor inside styled-components (https://styled-components.com/docs/basics#adapting-based-on-props)
 export const TagsList: React.FC<Props> = ({tags}) => {
   const tagList = tags.map((tag) => (
     <Text

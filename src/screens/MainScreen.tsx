@@ -48,6 +48,7 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
           keyExtractor={(item) => item.id}
         />
       ) : (
+// TODO: Use ListEmptyComponent instead https://reactnative.dev/docs/flatlist#listemptycomponent
         <EmptyList />
       )}
     </View>

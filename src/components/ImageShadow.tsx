@@ -5,6 +5,8 @@ interface Props {
   rounded: boolean;
 }
 
+// TODO: Replace named export with the default export (also in other files).
+// Keep the const name the same as the file name. In that case auto import will work the same.
 export const ImageShadow: React.FC<Props> = ({rounded}) => {
   return (
     <Svg width="100%" height="100%" viewBox="0 0 400 225">

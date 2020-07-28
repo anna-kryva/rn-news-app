@@ -14,6 +14,9 @@ import {LoadingSpinner} from '../components/LoadingSpinner';
 export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
   const {setOptions} = useNavigation();
   const {id} = route.params;
+// TODO: Idea: extract the caching logic below (useArticleQuery & useArticleContentQuery) into a separate hook.
+// useArticle(id: string): QueryResult<ArticleQuery | ArticleContentQuery> { ... }
+// All fields should be merged manually. R.mergeWithKey can be a good option.
   const {
     data: cachedData,
     loading: cachedLoading,
@@ -42,7 +45,9 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
     return <LoadingSpinner />;
   }
 
+// TODO: To prevent Animated.Value from recreating each time it's better to wrap it with useRef(...).current
   const scrollY = new Animated.Value(0);
+// TODO: To be fantastically performant you can wrap this guy with useMemo(() => ..., [scrollY]) as well.
   const headerTranslate = Animated.divide(scrollY, -2);
 
   return (
@@ -57,6 +62,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
         }}>
         <Cover image={cachedData!.article!.cover} rounded={false}>
           <CoverContent
+// TODO: It's better to make explicit unwrap only once (right after you checked that both error and loading are falsy values).
             title={cachedData!.article!.title}
             tags={cachedData!.article!.tags}
             style={{
@@ -72,6 +78,7 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
         onScroll={Animated.event(
           [{nativeEvent: {contentOffset: {y: scrollY}}}],
           {useNativeDriver: true},
+// TODO: Is it possible to get rid of width: '100%' property here?
         )}>
         <View style={{width: '100%', aspectRatio: 16 / 9}} />
         {fetchedLoading ? (

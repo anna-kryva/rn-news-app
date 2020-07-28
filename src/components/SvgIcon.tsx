@@ -1,6 +1,7 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
+// TODO: Rename SvgIcon to something more meaningful.
 export const SvgIcon: React.FC = () => {
   return (
     <Svg width="45" height="45" viewBox="0 0 32 32" fill="black">
