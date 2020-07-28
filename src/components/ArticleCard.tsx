@@ -2,10 +2,10 @@ import React, {useCallback} from 'react';
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
-import {ArticleCardType} from '../types';
-
 import {Cover} from './Cover';
 import {CoverContent} from './CoverContent';
+
+import {ArticleType} from '../types';
 import {BORDER_RADIUS_SMALL} from '../constants';
 
 const Container = styled.View`
@@ -26,7 +26,7 @@ const Title = styled.Text`
 `;
 
 interface Props {
-  article: ArticleCardType;
+  article: ArticleType;
   onPress: (id: string) => void;
 }
 

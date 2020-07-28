@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import ImageShadow from './ImageShadow';
-import {CoverImage} from '../types';
+import {ArticleCoverType} from '../types';
 import {
   ASPECT_RATIO,
   BORDER_RADIUS_BIG,
@@ -9,7 +9,7 @@ import {
 } from '../constants';
 
 interface Props {
-  image?: CoverImage;
+  image?: ArticleCoverType;
   children?: ReactNode;
   rounded: boolean;
 }

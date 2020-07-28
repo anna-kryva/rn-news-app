@@ -1,15 +1,18 @@
 import React, {useEffect} from 'react';
-import {Animated, View, ScrollView} from 'react-native';
+import {Animated, View} from 'react-native';
 import Markdown from 'react-native-markdown-display';
 import {useNavigation} from '@react-navigation/native';
+import {StackScreenProps} from '@react-navigation/stack';
 
 import {useArticleQuery, useArticleContentQuery} from '../generated/graphql';
-import {ArticleScreenProps} from '../types';
+import {RootStackParamList} from '../types';
 
 import {Cover} from '../components/Cover';
 import {ErrorComponent} from '../components/ErrorComponent';
 import {CoverContent} from '../components/CoverContent';
 import {LoadingSpinner} from '../components/LoadingSpinner';
+
+type ArticleScreenProps = StackScreenProps<RootStackParamList, 'Article'>;
 
 export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
   const {setOptions} = useNavigation();
@@ -60,9 +63,11 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
             title={cachedData!.article!.title}
             tags={cachedData!.article!.tags}
             style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              textAlign: 'center',
+              view: {
+                alignItems: 'center',
+                justifyContent: 'center',
+              },
+              text: {textAlign: 'center'},
             }}
           />
         </Cover>

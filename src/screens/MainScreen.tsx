@@ -1,13 +1,16 @@
 import React, {useCallback} from 'react';
 import {FlatList, ListRenderItem, View} from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
 
 import {useArticlesQuery} from '../generated/graphql';
-import {ArticleCardType, MainScreenProps} from '../types';
+import {ArticleType, RootStackParamList} from '../types';
 
 import {ArticleCard} from '../components/ArticleCard';
 import {LoadingSpinner} from '../components/LoadingSpinner';
 import {EmptyList} from '../components/EmptyList';
 import {ErrorComponent} from '../components/ErrorComponent';
+
+type MainScreenProps = StackScreenProps<RootStackParamList, 'Main'>;
 
 export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
   const {loading, error, data, refetch} = useArticlesQuery({
@@ -21,7 +24,7 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
     [navigation],
   );
 
-  const renderItem = useCallback<ListRenderItem<ArticleCardType>>(
+  const renderItem = useCallback<ListRenderItem<ArticleType>>(
     ({item}) => <ArticleCard article={item} onPress={pressHandler} />,
     [pressHandler],
   );
