@@ -1,16 +1,12 @@
 import React, {ReactNode} from 'react';
-import {View, Image} from 'react-native';
-import styled from 'styled-components/native';
-import {ImageShadow} from './ImageShadow';
+import {View, Image, StyleSheet} from 'react-native';
+import ImageShadow from './ImageShadow';
 import {CoverImage} from '../types';
-
-const Wrapper = styled.View`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-`;
+import {
+  ASPECT_RATIO,
+  BORDER_RADIUS_BIG,
+  BORDER_RADIUS_SMALL,
+} from '../constants';
 
 interface Props {
   image?: CoverImage;
@@ -20,18 +16,22 @@ interface Props {
 
 export const Cover: React.FC<Props> = ({image, children, rounded}) => {
   return (
-    <View style={{aspectRatio: 16 / 9, borderRadius: rounded ? 10 : 0}}>
+    <View
+      style={{
+        aspectRatio: ASPECT_RATIO,
+        borderRadius: rounded ? BORDER_RADIUS_BIG : 0,
+      }}>
       <Image
-        style={{flex: 1}}
-        borderRadius={rounded ? 5 : 0}
+        style={{width: '100%', height: '100%'}}
+        borderRadius={rounded ? BORDER_RADIUS_SMALL : 0}
         defaultSource={require('../assets/placeholder.jpg')}
         source={image ? {uri: image.url} : require('../assets/default.png')}
         resizeMode="cover"
       />
-      <Wrapper>
+      <View style={StyleSheet.absoluteFill}>
         <ImageShadow rounded={rounded} />
-      </Wrapper>
-      <Wrapper>{children}</Wrapper>
+      </View>
+      <View style={StyleSheet.absoluteFill}>{children}</View>
     </View>
   );
 };

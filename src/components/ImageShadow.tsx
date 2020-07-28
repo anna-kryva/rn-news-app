@@ -1,11 +1,12 @@
 import React from 'react';
 import Svg, {LinearGradient, Defs, Stop, Rect} from 'react-native-svg';
+import {BORDER_RADIUS_SMALL} from '../constants';
 
 interface Props {
   rounded: boolean;
 }
 
-export const ImageShadow: React.FC<Props> = ({rounded}) => {
+const ImageShadow: React.FC<Props> = ({rounded}) => {
   return (
     <Svg width="100%" height="100%" viewBox="0 0 400 225">
       <Defs>
@@ -20,9 +21,11 @@ export const ImageShadow: React.FC<Props> = ({rounded}) => {
         width="100%"
         height="100%"
         fill="url(#grad)"
-        rx={rounded ? '5' : '0'}
-        ry={rounded ? '5' : '0'}
+        rx={rounded ? BORDER_RADIUS_SMALL : '0'}
+        ry={rounded ? BORDER_RADIUS_SMALL : '0'}
       />
     </Svg>
   );
 };
+
+export default ImageShadow;

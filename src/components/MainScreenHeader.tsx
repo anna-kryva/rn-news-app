@@ -1,11 +1,11 @@
 import React from 'react';
 import {View} from 'react-native';
-import {SvgIcon} from './SvgIcon';
+import AppIcon from '../icons/AppIcon';
 
 export const MainScreenHeader: React.FC = () => {
   return (
     <View style={{flex: 1, alignItems: 'center'}}>
-      <SvgIcon />
+      <AppIcon />
     </View>
   );
 };

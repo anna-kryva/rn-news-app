@@ -1,7 +1,7 @@
 import React from 'react';
 import Svg, {Path} from 'react-native-svg';
 
-export const SvgIcon: React.FC = () => {
+const AppIcon: React.FC = () => {
   return (
     <Svg width="45" height="45" viewBox="0 0 32 32" fill="black">
       <Path
@@ -11,3 +11,5 @@ export const SvgIcon: React.FC = () => {
     </Svg>
   );
 };
+
+export default AppIcon;

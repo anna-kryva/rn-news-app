@@ -7,7 +7,7 @@ import {MainScreenHeader} from './src/components/MainScreenHeader';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import client from './apollo-client';
+import client from './src/apollo-client';
 import {ApolloProvider} from '@apollo/client';
 
 const Stack = createStackNavigator();

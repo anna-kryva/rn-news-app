@@ -1,9 +1,18 @@
 import React from 'react';
-import {View, Text, TouchableOpacity, Image} from 'react-native';
+import {View, TouchableOpacity} from 'react-native';
+import styled from 'styled-components/native';
+import UpdateIcon from '../icons/UpdateIcon';
 
 interface Props {
   refetch: () => void;
 }
+
+const Comment = styled.Text`
+  font-size: 20px;
+  color: gray;
+  text-align: center;
+  padding: 10px;
+`;
 
 export const ErrorComponent: React.FC<Props> = ({refetch}) => {
   return (
@@ -14,18 +23,9 @@ export const ErrorComponent: React.FC<Props> = ({refetch}) => {
         justifyContent: 'center',
         padding: 20,
       }}>
-      <Text
-        style={{fontSize: 20, color: 'gray', textAlign: 'center', padding: 10}}>
-        Oops, something went wrong... Please, try again
-      </Text>
-      <TouchableOpacity
-        style={{width: '50%', aspectRatio: 1, margin: 20}}
-        onPress={refetch}>
-        <Image
-          style={{flex: 1}}
-          source={require('../assets/refresh.png')}
-          resizeMode="contain"
-        />
+      <Comment>Oops, something went wrong... Please, try again</Comment>
+      <TouchableOpacity style={{margin: 20}} onPress={refetch}>
+        <UpdateIcon />
       </TouchableOpacity>
     </View>
   );

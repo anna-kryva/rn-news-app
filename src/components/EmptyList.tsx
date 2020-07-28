@@ -1,5 +1,14 @@
 import React from 'react';
-import {View, Text, Image} from 'react-native';
+import {View} from 'react-native';
+import styled from 'styled-components/native';
+import EmptyListIcon from '../icons/EmptyListIcon';
+
+const Comment = styled.Text`
+  font-size: 20px;
+  text-align: center;
+  color: gray;
+  padding: 5px;
+`;
 
 export const EmptyList: React.FC = () => {
   return (
@@ -10,16 +19,11 @@ export const EmptyList: React.FC = () => {
         justifyContent: 'center',
         padding: 10,
       }}>
-      <Text
-        style={{fontSize: 20, textAlign: 'center', color: 'gray', padding: 5}}>
+      <Comment>
         Our content manager is working on new articles. Stay in touch!
-      </Text>
-      <View style={{margin: 10, width: '50%', aspectRatio: 1}}>
-        <Image
-          style={{flex: 1}}
-          source={require('../assets/empty-list.png')}
-          resizeMode="contain"
-        />
+      </Comment>
+      <View style={{margin: 10, alignItems: 'center'}}>
+        <EmptyListIcon />
       </View>
     </View>
   );

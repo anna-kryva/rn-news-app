@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View} from 'react-native';
+import styled from 'styled-components/native';
 import {TagType} from '../types';
 
 const getColor = (name: string): string => {
@@ -15,25 +16,28 @@ const getColor = (name: string): string => {
   }
 };
 
+type StyledTag = {
+  name: string;
+};
+
+const StyledTag = styled.Text<StyledTag>`
+  background-color: ${(props) => getColor(props.name)};
+  color: #fff;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 12px;
+  padding: 5px;
+`;
+
 interface Props {
   tags: TagType[];
 }
 
 export const TagsList: React.FC<Props> = ({tags}) => {
   const tagList = tags.map((tag) => (
-    <Text
-      key={tag.id}
-      style={{
-        backgroundColor: getColor(tag.name),
-        color: '#fff',
-        borderRadius: 2,
-        fontWeight: 'bold',
-        fontSize: 12,
-        padding: 5,
-        margin: 5,
-      }}>
+    <StyledTag key={tag.id} name={tag.name} style={{margin: 5}}>
       {tag.name.toUpperCase()}
-    </Text>
+    </StyledTag>
   ));
 
   return (

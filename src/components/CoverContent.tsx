@@ -1,38 +1,35 @@
 import React from 'react';
-import {Text, View, FlexAlignType, FlexStyle, TextStyle} from 'react-native';
+import {View, StyleProp, ViewStyle} from 'react-native';
+import styled from 'styled-components/native';
 import {TagsList} from './TagsList';
 import {TagType} from '../types';
 
 interface Props {
   title: string;
   tags: TagType[];
-  style?: {
-    alignItems: FlexAlignType;
-    justifyContent: FlexStyle['justifyContent'];
-    textAlign: TextStyle['textAlign'];
-  };
+  style?: StyleProp<ViewStyle>;
 }
+
+const Title = styled.Text`
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  padding: 5px;
+`;
 
 export const CoverContent: React.FC<Props> = ({title, tags, style}) => {
   return (
     <View
-      style={{
-        flex: 1,
-        justifyContent: 'flex-end',
-        alignItems: 'flex-start',
-        padding: 10,
-        ...style,
-      }}>
-      <Text
-        style={{
-          fontSize: 20,
-          fontWeight: '700',
-          color: 'white',
-          padding: 5,
-          ...style,
-        }}>
-        {title}
-      </Text>
+      style={[
+        {
+          flex: 1,
+          justifyContent: 'flex-end',
+          alignItems: 'flex-start',
+          padding: 10,
+        },
+        style,
+      ]}>
+      <Title style={style}>{title}</Title>
       <TagsList tags={tags} />
     </View>
   );
