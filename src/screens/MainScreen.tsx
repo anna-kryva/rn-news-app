@@ -1,5 +1,11 @@
 import React, {useCallback} from 'react';
-import {FlatList, ListRenderItem, View} from 'react-native';
+import {
+  FlatList,
+  ListRenderItem,
+  View,
+  FlatListProps,
+  RefreshControl,
+} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 
 import {useArticlesQuery} from '../generated/graphql';
@@ -14,11 +20,11 @@ type MainScreenProps = StackScreenProps<RootStackParamList, 'Main'>;
 
 export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
   const {loading, error, data, refetch} = useArticlesQuery({
-    fetchPolicy: 'network-only',
+    fetchPolicy: 'cache-and-network',
   });
 
-  const pressHandler = useCallback(
-    (id: string): void => {
+  const pressHandler = useCallback<(id: string) => void>(
+    (id) => {
       navigation.navigate('Article', {id});
     },
     [navigation],
@@ -29,8 +35,20 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
     [pressHandler],
   );
 
+  const keyExtractorHandler = useCallback<
+    NonNullable<FlatListProps<ArticleType>['keyExtractor']>
+  >((item) => item.id, []);
+
+  const [refreshing, setRefreshing] = React.useState(false);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, [refetch]);
+
   if (error) {
-    return <ErrorComponent refetch={() => refetch()} />;
+    return <ErrorComponent refetch={refetch} />;
   }
 
   if (loading) {
@@ -39,15 +57,15 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
 
   return (
     <View style={{flex: 1}}>
-      {data!.articles.length !== 0 ? (
-        <FlatList
-          data={data!.articles}
-          renderItem={renderItem}
-          keyExtractor={(item) => item.id}
-        />
-      ) : (
-        <EmptyList />
-      )}
+      <FlatList
+        data={data!.articles}
+        renderItem={renderItem}
+        keyExtractor={keyExtractorHandler}
+        ListEmptyComponent={<EmptyList />}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      />
     </View>
   );
 };

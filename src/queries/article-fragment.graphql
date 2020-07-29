@@ -1,0 +1,13 @@
+fragment Article on Article {
+  id
+  title
+  shortContent
+  content
+  cover {
+    url
+  }
+  tags {
+    id
+    name
+  }
+}
