@@ -10,7 +10,7 @@ const Comment = styled.Text`
   padding: 5px;
 `;
 
-export const EmptyList: React.FC = () => {
+const EmptyList: React.FC = () => {
   return (
     <View
       style={{
@@ -28,3 +28,5 @@ export const EmptyList: React.FC = () => {
     </View>
   );
 };
+
+export default EmptyList;

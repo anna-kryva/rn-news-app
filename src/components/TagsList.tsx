@@ -33,7 +33,7 @@ interface Props {
   tags: TagType[];
 }
 
-export const TagsList: React.FC<Props> = ({tags}) => {
+const TagsList: React.FC<Props> = ({tags}) => {
   const tagList = tags.map((tag) => (
     <StyledTag key={tag.id} name={tag.name} style={{margin: 5}}>
       {tag.name.toUpperCase()}
@@ -44,3 +44,5 @@ export const TagsList: React.FC<Props> = ({tags}) => {
     <View style={{flexDirection: 'row', flexWrap: 'wrap'}}>{tagList}</View>
   );
 };
+
+export default TagsList;

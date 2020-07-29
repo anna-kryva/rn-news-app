@@ -14,7 +14,7 @@ const Comment = styled.Text`
   padding: 10px;
 `;
 
-export const ErrorComponent: React.FC<Props> = ({refetch}) => {
+const ErrorComponent: React.FC<Props> = ({refetch}) => {
   return (
     <View
       style={{
@@ -30,3 +30,5 @@ export const ErrorComponent: React.FC<Props> = ({refetch}) => {
     </View>
   );
 };
+
+export default ErrorComponent;

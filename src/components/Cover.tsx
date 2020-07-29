@@ -14,7 +14,7 @@ interface Props {
   rounded: boolean;
 }
 
-export const Cover: React.FC<Props> = ({image, children, rounded}) => {
+const Cover: React.FC<Props> = ({image, children, rounded}) => {
   return (
     <View
       style={{
@@ -35,3 +35,5 @@ export const Cover: React.FC<Props> = ({image, children, rounded}) => {
     </View>
   );
 };
+
+export default Cover;

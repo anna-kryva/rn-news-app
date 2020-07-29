@@ -6,16 +6,16 @@ import {StackScreenProps} from '@react-navigation/stack';
 
 import {RootStackParamList} from '../types';
 
-import {Cover} from '../components/Cover';
-import {ErrorComponent} from '../components/ErrorComponent';
-import {CoverContent} from '../components/CoverContent';
-import {LoadingSpinner} from '../components/LoadingSpinner';
+import Cover from '../components/Cover';
+import ErrorComponent from '../components/ErrorComponent';
+import CoverContent from '../components/CoverContent';
+import LoadingSpinner from '../components/LoadingSpinner';
 import {ASPECT_RATIO} from '../constants';
 import useArticle from '../hooks/useArticle';
 
 type ArticleScreenProps = StackScreenProps<RootStackParamList, 'Article'>;
 
-export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
+const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
   const {setOptions} = useNavigation();
   const {id} = route.params;
   const {data, error, loading, refetch} = useArticle(id);
@@ -88,3 +88,5 @@ export const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
     </View>
   );
 };
+
+export default ArticleScreen;

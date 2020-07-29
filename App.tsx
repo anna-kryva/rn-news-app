@@ -1,8 +1,8 @@
 import React from 'react';
 
-import {ArticleScreen} from './src/screens/ArticleScreen';
-import {MainScreen} from './src/screens/MainScreen';
-import {MainScreenHeader} from './src/components/MainScreenHeader';
+import ArticleScreen from './src/screens/ArticleScreen';
+import MainScreen from './src/screens/MainScreen';
+import MainScreenHeader from './src/components/MainScreenHeader';
 
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';

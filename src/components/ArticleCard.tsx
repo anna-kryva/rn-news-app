@@ -2,8 +2,8 @@ import React, {useCallback} from 'react';
 import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
 
-import {Cover} from './Cover';
-import {CoverContent} from './CoverContent';
+import Cover from './Cover';
+import CoverContent from './CoverContent';
 
 import {ArticleType} from '../types';
 import {BORDER_RADIUS_SMALL} from '../constants';
@@ -30,7 +30,7 @@ interface Props {
   onPress: (id: string) => void;
 }
 
-export const ArticleCard: React.FC<Props> = ({article, onPress}) => {
+const ArticleCard: React.FC<Props> = ({article, onPress}) => {
   const {cover, id, title, tags} = article;
 
   const pressHandler = useCallback(() => onPress(id), [id, onPress]);
@@ -49,3 +49,5 @@ export const ArticleCard: React.FC<Props> = ({article, onPress}) => {
     </Container>
   );
 };
+
+export default ArticleCard;

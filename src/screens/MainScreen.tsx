@@ -11,14 +11,14 @@ import {StackScreenProps} from '@react-navigation/stack';
 import {useArticlesQuery} from '../generated/graphql';
 import {ArticleType, RootStackParamList} from '../types';
 
-import {ArticleCard} from '../components/ArticleCard';
-import {LoadingSpinner} from '../components/LoadingSpinner';
-import {EmptyList} from '../components/EmptyList';
-import {ErrorComponent} from '../components/ErrorComponent';
+import ArticleCard from '../components/ArticleCard';
+import LoadingSpinner from '../components/LoadingSpinner';
+import EmptyList from '../components/EmptyList';
+import ErrorComponent from '../components/ErrorComponent';
 
 type MainScreenProps = StackScreenProps<RootStackParamList, 'Main'>;
 
-export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
+const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
   const {loading, error, data, refetch} = useArticlesQuery({
     fetchPolicy: 'cache-and-network',
   });
@@ -69,3 +69,5 @@ export const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
     </View>
   );
 };
+
+export default MainScreen;

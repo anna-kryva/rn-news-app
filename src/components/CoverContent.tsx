@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, StyleProp, ViewStyle, TextStyle} from 'react-native';
 import styled from 'styled-components/native';
-import {TagsList} from './TagsList';
+import TagsList from './TagsList';
 import {TagType} from '../types';
 
 interface Props {
@@ -20,7 +20,7 @@ const Title = styled.Text`
   padding: 5px;
 `;
 
-export const CoverContent: React.FC<Props> = ({title, tags, style}) => {
+const CoverContent: React.FC<Props> = ({title, tags, style}) => {
   return (
     <View
       style={[
@@ -37,3 +37,5 @@ export const CoverContent: React.FC<Props> = ({title, tags, style}) => {
     </View>
   );
 };
+
+export default CoverContent;
