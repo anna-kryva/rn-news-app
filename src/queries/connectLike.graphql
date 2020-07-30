@@ -1,0 +1,11 @@
+mutation ConnectLike($articleId: ID!, $deviceId: String!) {
+  __typename
+  createLike(
+    data: {
+      article: {connect: {id: $articleId}}
+      deviceId: {connect: {deviceId: $deviceId}}
+    }
+  ) {
+    id
+  }
+}

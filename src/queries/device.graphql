@@ -1,0 +1,5 @@
+query Device($deviceId: String!) {
+  device(where: {deviceId: $deviceId}) {
+    id
+  }
+}
