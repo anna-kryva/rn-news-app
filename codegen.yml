@@ -1,5 +1,7 @@
 overwrite: true
-schema: "https://api-eu-central-1.graphcms.com/v2/ckcu8bo1s3oxy01w73x425l6i/master"
+schema: 
+  - "https://api-eu-central-1.graphcms.com/v2/ckcu8bo1s3oxy01w73x425l6i/master"
+  - "./client-schema.gql"
 documents: "src/**/*.graphql"
 generates:
   src/generated/graphql.tsx:
