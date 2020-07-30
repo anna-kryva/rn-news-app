@@ -7,14 +7,17 @@ import {
   BORDER_RADIUS_BIG,
   BORDER_RADIUS_SMALL,
 } from '../constants';
+import Like from './Like';
 
 interface Props {
+  id: string;
   image?: ArticleCoverType;
+  isLiked: boolean;
   children?: ReactNode;
   rounded: boolean;
 }
 
-const Cover: React.FC<Props> = ({image, children, rounded}) => {
+const Cover: React.FC<Props> = ({id, image, isLiked, children, rounded}) => {
   return (
     <View
       style={{
@@ -28,9 +31,15 @@ const Cover: React.FC<Props> = ({image, children, rounded}) => {
         source={image ? {uri: image.url} : require('../assets/default.png')}
         resizeMode="cover"
       />
+
       <View style={StyleSheet.absoluteFill}>
         <ImageShadow rounded={rounded} />
       </View>
+
+      <View style={StyleSheet.absoluteFill}>
+        <Like articleId={id} isLiked={isLiked} />
+      </View>
+
       <View style={StyleSheet.absoluteFill}>{children}</View>
     </View>
   );

@@ -53,7 +53,11 @@ const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
           right: 0,
           transform: [{translateY: headerTranslate}],
         }}>
-        <Cover image={cover} rounded={false}>
+        <Cover
+          image={cover}
+          rounded={false}
+          id={id}
+          isLiked={data.article.isLiked}>
           <CoverContent
             title={title}
             tags={tags}
