@@ -1,0 +1,18 @@
+query ArticleFull($articleId: ID!, $deviceId: String!) {
+  article(where: {id: $articleId}) {
+    id
+    title
+    shortContent
+    content
+    cover {
+      url
+    }
+    tags {
+      id
+      name
+    }
+    likes(where: {deviceId: {deviceId: $deviceId}}) {
+      id
+    }
+  }
+}
