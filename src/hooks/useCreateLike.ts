@@ -21,43 +21,41 @@ type CreateLikeOptions =
     >
   | undefined;
 
-type UseCreateLikeResult = [
+export type UseCreateLikeResult = [
   (options: CreateLikeOptions) => void,
   MutationResult<CreateLikeMutation & ConnectLikeMutation>,
 ];
 
 const useCreateLike = (): UseCreateLikeResult => {
-  const {
-    data: device,
-    loading: deviceLoading,
-    error: deviceError,
-  } = useDeviceQuery({
+  const {data, loading, error} = useDeviceQuery({
     variables: {
       deviceId: DEVICE_ID,
     },
     fetchPolicy: 'cache-and-network',
   });
 
-  const [createLikeMutation, createLikeData] = useCreateLikeMutation();
-  const [connectLikeMutation, connectLikeData] = useConnectLikeMutation();
+  const [createLikeMutation, createLikeResult] = useCreateLikeMutation();
+  const [connectLikeMutation, connectLikeResult] = useConnectLikeMutation();
 
   const createLike = useCallback(
     (options: CreateLikeOptions) => {
-      if (device?.device) {
-        createLikeMutation(options);
-      } else {
-        connectLikeMutation(options);
+      if (!loading) {
+        if (data?.device) {
+          connectLikeMutation(options);
+        } else {
+          createLikeMutation(options);
+        }
       }
     },
-    [connectLikeMutation, createLikeMutation, device?.device],
+    [connectLikeMutation, createLikeMutation, data?.device, loading],
   );
 
-  const mergeQueryResult = (k: string, l: any, r: any) => {
+  const mergeMutationResult = (k: string, l: any, r: any) => {
     switch (k as keyof MutationResult) {
       case 'loading':
-        return deviceLoading || r || l;
+        return loading || r || l;
       case 'error':
-        return deviceError || r || l;
+        return error || r || l;
       default:
         return r || l;
     }
@@ -65,7 +63,7 @@ const useCreateLike = (): UseCreateLikeResult => {
 
   return [
     createLike,
-    R.mergeWithKey(mergeQueryResult, createLikeData, connectLikeData),
+    R.mergeWithKey(mergeMutationResult, createLikeResult, connectLikeResult),
   ];
 };
 
