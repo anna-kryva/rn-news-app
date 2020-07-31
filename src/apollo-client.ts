@@ -15,6 +15,15 @@ const client = new ApolloClient({
           },
         },
       },
+      Article: {
+        fields: {
+          likes: {
+            merge(_ignored, incoming) {
+              return incoming;
+            },
+          },
+        },
+      },
     },
   }),
 });
