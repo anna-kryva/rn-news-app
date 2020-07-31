@@ -12,7 +12,7 @@ import Like from './Like';
 interface Props {
   id: string;
   image?: ArticleCoverType;
-  likes: LikeType[];
+  likes?: LikeType[];
   children?: ReactNode;
   rounded: boolean;
 }
@@ -36,9 +36,11 @@ const Cover: React.FC<Props> = ({id, image, likes, children, rounded}) => {
         <ImageShadow rounded={rounded} />
       </View>
 
-      <View style={StyleSheet.absoluteFill}>
-        <Like articleId={id} likes={likes} />
-      </View>
+      {likes ? (
+        <View style={StyleSheet.absoluteFill}>
+          <Like articleId={id} likes={likes} />
+        </View>
+      ) : null}
 
       <View style={StyleSheet.absoluteFill}>{children}</View>
     </View>

@@ -1,5 +1,5 @@
 import React, {useEffect, useCallback, useRef, useMemo} from 'react';
-import {Animated, View, RefreshControl} from 'react-native';
+import {Animated, View, RefreshControl, StyleSheet} from 'react-native';
 import Markdown from 'react-native-markdown-display';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -12,6 +12,7 @@ import Cover from '../components/Cover';
 import ErrorComponent from '../components/ErrorComponent';
 import CoverContent from '../components/CoverContent';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Like from '../components/Like';
 
 type ArticleScreenProps = StackScreenProps<RootStackParamList, 'Article'>;
 
@@ -53,7 +54,7 @@ const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
           right: 0,
           transform: [{translateY: headerTranslate}],
         }}>
-        <Cover image={cover} rounded={false} id={id} likes={likes}>
+        <Cover image={cover} rounded={false} id={id}>
           <CoverContent
             title={title}
             tags={tags}
@@ -67,6 +68,7 @@ const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
           />
         </Cover>
       </Animated.View>
+
       <Animated.ScrollView
         scrollEventThrottle={1}
         onScroll={Animated.event(
@@ -76,7 +78,12 @@ const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
         refreshControl={
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }>
-        <View style={{aspectRatio: ASPECT_RATIO}} />
+        <View style={{aspectRatio: ASPECT_RATIO}}>
+          <View style={StyleSheet.absoluteFill}>
+            <Like articleId={id} likes={likes} />
+          </View>
+        </View>
+
         {loading ? (
           <LoadingSpinner />
         ) : (
