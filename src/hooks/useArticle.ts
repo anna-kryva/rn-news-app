@@ -1,15 +1,17 @@
 import {
   useArticleQuery,
   useArticleContentQuery,
-  ArticleFragment,
+  ArticleFullQuery,
 } from '../generated/graphql';
 import R from 'ramda';
 import {QueryResult} from '@apollo/client';
+import {DEVICE_ID} from '../constants';
 
-const useArticle = (
-  id: string,
-): QueryResult<Record<'article', ArticleFragment>> => {
-  const cached = useArticleQuery({variables: {id}, fetchPolicy: 'cache-only'});
+const useArticle = (id: string): QueryResult<ArticleFullQuery> => {
+  const cached = useArticleQuery({
+    variables: {articleId: id, deviceId: DEVICE_ID},
+    fetchPolicy: 'cache-only',
+  });
 
   const fetched = useArticleContentQuery({
     variables: {id},

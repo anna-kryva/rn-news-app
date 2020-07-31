@@ -7,7 +7,6 @@ import CoverContent from './CoverContent';
 
 import {ArticleType} from '../types';
 import {BORDER_RADIUS_SMALL} from '../constants';
-import {useArticleLikesQuery} from '../generated/graphql';
 
 const Container = styled.View`
   border-radius: ${BORDER_RADIUS_SMALL}px;
@@ -32,15 +31,14 @@ interface Props {
 }
 
 const ArticleCard: React.FC<Props> = ({article, onPress}) => {
-  const {cover, id, title, tags} = article;
-  const {data: likes} = useArticleLikesQuery({variables: {articleId: id}});
+  const {cover, id, title, tags, likes} = article;
 
   const pressHandler = useCallback(() => onPress(id), [id, onPress]);
 
   return (
     <Container style={{margin: 10}}>
       <TouchableOpacity onPress={pressHandler}>
-        <Cover image={cover} rounded={true} id={id} isLiked={article.isLiked}>
+        <Cover image={cover} rounded={true} id={id} likes={likes}>
           <CoverContent title={title} tags={tags} />
         </Cover>
 

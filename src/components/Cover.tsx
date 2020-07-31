@@ -1,7 +1,7 @@
 import React, {ReactNode} from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import ImageShadow from './ImageShadow';
-import {ArticleCoverType} from '../types';
+import {ArticleCoverType, LikeType} from '../types';
 import {
   ASPECT_RATIO,
   BORDER_RADIUS_BIG,
@@ -12,12 +12,12 @@ import Like from './Like';
 interface Props {
   id: string;
   image?: ArticleCoverType;
-  isLiked: boolean;
+  likes: LikeType[];
   children?: ReactNode;
   rounded: boolean;
 }
 
-const Cover: React.FC<Props> = ({id, image, isLiked, children, rounded}) => {
+const Cover: React.FC<Props> = ({id, image, likes, children, rounded}) => {
   return (
     <View
       style={{
@@ -37,7 +37,7 @@ const Cover: React.FC<Props> = ({id, image, isLiked, children, rounded}) => {
       </View>
 
       <View style={StyleSheet.absoluteFill}>
-        <Like articleId={id} isLiked={isLiked} />
+        <Like articleId={id} likes={likes} />
       </View>
 
       <View style={StyleSheet.absoluteFill}>{children}</View>
