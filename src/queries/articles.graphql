@@ -1,4 +1,4 @@
-query articles {
+query Articles($deviceId: String!) {
   articles {
     id
     title
@@ -10,6 +10,8 @@ query articles {
       id
       name
     }
-    isLiked @client
+    likes(where: {deviceId: {deviceId: $deviceId}}) {
+      id
+    }
   }
 }

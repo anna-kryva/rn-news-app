@@ -1,5 +1,5 @@
-query Article($id: ID!) {
-  article(where: {id: $id}) {
+query Article($articleId: ID!, $deviceId: String!) {
+  article(where: {id: $articleId}) {
     id
     title
     shortContent
@@ -10,6 +10,8 @@ query Article($id: ID!) {
       id
       name
     }
-    isLiked @client
+    likes(where: {deviceId: {deviceId: $deviceId}}) {
+      id
+    }
   }
 }
