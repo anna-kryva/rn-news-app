@@ -1,10 +1,12 @@
 import React, {useCallback} from 'react';
+import R from 'ramda';
+
 import {View, TouchableOpacity} from 'react-native';
-import LikeFilledIcon from '../icons/LikeFilledIcon';
-import LikeOutlinedIcon from '../icons/LikeOutlinedIcon';
+import LikeFilledIcon from './icons/LikeFilledIcon';
+import LikeOutlinedIcon from './icons/LikeOutlinedIcon';
+
 import useToggleLike from '../hooks/useToggleLike';
 import {LikeType} from '../types';
-import R from 'ramda';
 
 interface Props {
   articleId: string;

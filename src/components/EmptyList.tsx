@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
 import styled from 'styled-components/native';
-import EmptyListIcon from '../icons/EmptyListIcon';
+import EmptyListIcon from './icons/EmptyListIcon';
 
 const Comment = styled.Text`
   font-size: 20px;

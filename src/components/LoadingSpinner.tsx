@@ -1,8 +1,12 @@
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
+import {View, ActivityIndicator} from 'react-native';
 
 const LoadingSpinner: React.FC = () => {
-  return <ActivityIndicator color="#0a88f2" size="large" />;
+  return (
+    <View style={{flex: 1}}>
+      <ActivityIndicator color="#0a88f2" size="large" />
+    </View>
+  );
 };
 
 export default LoadingSpinner;

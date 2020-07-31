@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
-import UpdateIcon from '../icons/UpdateIcon';
+import UpdateIcon from './icons/UpdateIcon';
 
 interface Props {
   refetch: () => void;
