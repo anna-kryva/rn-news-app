@@ -2,15 +2,21 @@ import React, {useCallback} from 'react';
 import {View, TouchableOpacity} from 'react-native';
 import LikeFilledIcon from '../icons/LikeFilledIcon';
 import LikeOutlinedIcon from '../icons/LikeOutlinedIcon';
-import useLike from '../hooks/useLike';
+import useToggleLike from '../hooks/useToggleLike';
+import {LikeType} from '../types';
+import R from 'ramda';
 
 interface Props {
   articleId: string;
-  isLiked: boolean;
+  likes: LikeType[];
 }
 
-const Like: React.FC<Props> = ({articleId, isLiked}) => {
-  const changeLikeStatus = useLike(articleId, isLiked);
+const Like: React.FC<Props> = ({articleId, likes}) => {
+  const [changeLikeStatus, {error}] = useToggleLike(articleId, likes);
+
+  if (error) {
+    console.log(error);
+  }
 
   const pressHandler = useCallback(() => {
     changeLikeStatus();
@@ -25,7 +31,7 @@ const Like: React.FC<Props> = ({articleId, isLiked}) => {
         padding: 10,
       }}>
       <TouchableOpacity onPress={pressHandler}>
-        {isLiked ? <LikeFilledIcon /> : <LikeOutlinedIcon />}
+        {R.isEmpty(likes) ? <LikeOutlinedIcon /> : <LikeFilledIcon />}
       </TouchableOpacity>
     </View>
   );
