@@ -1,0 +1,6 @@
+mutation DeleteLike($id: ID!) {
+  __typename
+  deleteLike(where: {id: $id}) {
+    id
+  }
+}
