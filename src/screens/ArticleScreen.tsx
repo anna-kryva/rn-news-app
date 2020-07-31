@@ -4,14 +4,14 @@ import Markdown from 'react-native-markdown-display';
 import {useNavigation} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 
+import {ASPECT_RATIO} from '../constants';
 import {RootStackParamList} from '../types';
+import useArticle from '../hooks/useArticle';
 
 import Cover from '../components/Cover';
 import ErrorComponent from '../components/ErrorComponent';
 import CoverContent from '../components/CoverContent';
 import LoadingSpinner from '../components/LoadingSpinner';
-import {ASPECT_RATIO} from '../constants';
-import useArticle from '../hooks/useArticle';
 
 type ArticleScreenProps = StackScreenProps<RootStackParamList, 'Article'>;
 
@@ -36,7 +36,7 @@ const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
     return <ErrorComponent refetch={refetch} />;
   }
 
-  const {cover, title, tags, content} = data!.article!;
+  const {cover, title, tags, content, likes} = data!.article!;
 
   const scrollY = useRef(new Animated.Value(0)).current;
   const headerTranslate = useMemo(() => Animated.divide(scrollY, -2), [
@@ -53,11 +53,7 @@ const ArticleScreen: React.FC<ArticleScreenProps> = ({route}) => {
           right: 0,
           transform: [{translateY: headerTranslate}],
         }}>
-        <Cover
-          image={cover}
-          rounded={false}
-          id={id}
-          isLiked={data.article.isLiked}>
+        <Cover image={cover} rounded={false} id={id} likes={likes}>
           <CoverContent
             title={title}
             tags={tags}

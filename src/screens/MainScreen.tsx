@@ -15,12 +15,14 @@ import ArticleCard from '../components/ArticleCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import EmptyList from '../components/EmptyList';
 import ErrorComponent from '../components/ErrorComponent';
+import {DEVICE_ID} from '../constants';
 
 type MainScreenProps = StackScreenProps<RootStackParamList, 'Main'>;
 
 const MainScreen: React.FC<MainScreenProps> = ({navigation}) => {
   const {loading, error, data, refetch} = useArticlesQuery({
     fetchPolicy: 'cache-and-network',
+    variables: {deviceId: DEVICE_ID},
   });
 
   const pressHandler = useCallback<(id: string) => void>(
